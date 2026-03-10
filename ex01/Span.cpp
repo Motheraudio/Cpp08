@@ -1,4 +1,5 @@
 #include "Span.hpp"
+#include <algorithm>
 #include <stdexcept>
 Span::Span() : maxsize(67) {}
 
@@ -23,8 +24,27 @@ void Span::addNumber(int number) {
     throw(std::length_error("Max size exceeded"));
   this->v.push_back(number);
 }
-unsigned int Span::shortestSpan() {
+int Span::shortestSpan() {
+  int shortest = -1;
   if (this->v.size() <= 1)
     throw(std::length_error("invalid shortest span call"));
+  std::sort(this->v.begin(), this->v.end());
+  std::vector<int>::iterator it = this->v.begin();
+  while (it + 1 != this->v.end()) {
+    if (shortest == -1 || *(it + 1) - *it < shortest)
+      shortest = *(it + 1) - *it;
+    it++;
+  }
+  return (shortest);
 }
-unsigned int Span::longestSpan() {}
+int Span::longestSpan() {
+  int longest = -1;
+  if (this->v.size() <= 1)
+    throw(std::length_error("invalid longest span call"));
+  std::sort(this->v.rbegin(), this->v.rend());
+  std::vector<int>::iterator it = this->v.begin();
+  while (it + 1 != this->v.end()) {
+    if (longest == -1 || *it - *(it + 1) > longest)
+      longest = *it - *(it + 1);
+    it++;
+  }

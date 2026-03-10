@@ -8,11 +8,11 @@ public:
   Span(const Span &obj);
   ~Span();
   Span &operator=(const Span &obj);
+  void addNumber(int number);
+  int shortestSpan();
 
 private:
-  void addNumber(int number);
-  unsigned int shortestSpan();
-  unsigned int longestSpan();
+  int longestSpan();
   std::vector<int> v;
   unsigned int maxsize;
 };
