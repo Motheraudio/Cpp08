@@ -31,5 +31,11 @@ int main() {
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
   }
+  Span sp6(1);
+  try {
+    sp6.addRange(hehe.begin(), hehe.end());
+  } catch (std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
   return 0;
 }
